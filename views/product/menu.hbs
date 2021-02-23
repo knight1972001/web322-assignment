@@ -1,0 +1,21 @@
+    <header id="header" class="masthead" style="background-image:url('../../images/bakery.jpg');">
+        <div class="container">
+            <div class="intro-text">
+                <div class="intro-lead-in"><span>Welcome To Bakery</span></div>
+                <div class="intro-heading text-uppercase"><span>It's Nice To Meet You</span></div
+                ><a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" role="button" href="#container">Get Started</a></div>
+        </div>
+    </header>
+
+    <div id="container" class="container" style="margin-top: 50px">
+            <div class="row text-center" >
+                {{#each allProduct}}
+                    <div class="col-md-4" style="margin-top: 50px">
+                        <img id="contentImg" src={{img}}>
+                        <h4 class="section-heading">{{title}}</h4>
+                        <p class="text-muted">{{des}}</p>
+                        <p class="btn btn-primary" style="position:absolute;bottom:-20px;right:5px;margin:0px;padding:10px 23px;">{{price}}</p>
+                    </div>
+                {{/each}}
+            </div>
+        </div>

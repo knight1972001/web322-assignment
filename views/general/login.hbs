@@ -1,0 +1,38 @@
+<header id="header" class="masthead" style="background-image:url('images/bakery.jpg');">
+        <div class="container">
+            <div class="intro-text">
+                <div class="intro-lead-in"><span>Welcome To Bakery</span></div>
+                <div class="intro-heading text-uppercase"><span>It's Nice To Meet You</span></div>
+    </div>
+</header>
+
+<div class="container" style="margin-top: 50px">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs justify-content-center">
+            <li class="nav-item">
+            <a class="nav-link active" style="font-size: 20px" href="/login">Login</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" style="font-size: 20px" href="/register">Register</a>
+            </li>
+        </ul>
+</div>
+
+<div class="holder">
+    <form method="POST" action="/login">
+        <h2>Welcome back!</h2>
+        <input type="text" id="email" name="email" placeholder="Email address" value={{values.email}}>
+        <br>
+        {{#if validationResults.email}}
+        <span style="color: red;">{{ validationResults.email }}</span><br>
+        {{/if}}
+
+        <input type="password" id="password" name="password" placeholder="Password">
+        <br>
+        {{#if validationResults.password}}
+        <span style="color: red;">{{ validationResults.password }}</span><br>
+        {{/if}}
+        <br>
+        <button type="submit">Login</button>
+    </form>
+</div>

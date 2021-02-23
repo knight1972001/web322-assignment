@@ -1,0 +1,56 @@
+#contentImg{
+    border-radius: 30%;
+    width: 100%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 20px;
+}
+
+.holder{
+    border: 1px solid rgb(0, 108, 141);
+    padding: 10px;
+    text-align: center;
+}
+
+.holder h2{
+    color: #fed136;
+}
+
+.holder input{
+    margin: 5px;
+}
+
+.holder h3{
+    color: #fed136;
+}
+
+.holder p{
+    color:rgb(0, 108, 141);
+}
+
+.holder input{
+    border: 2px solid rgb(0, 108, 141);
+}
+
+.holder button{
+    margin-top: 20px;
+    padding: 5px 70px;
+    background-color:white;
+    font-size: 20px;
+    color: rgb(0, 108, 141);
+    border: 2px solid rgb(0, 108, 141);
+    transition: background-color 0.5s ease,
+                color 0.5s ease;
+}
+
+.holder button:hover{
+    background: rgb(0, 108, 141);
+    color: white;
+}
+
+#welcome{
+    position: fixed;
+    background-color: red;
+    top:0;
+}
