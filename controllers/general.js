@@ -124,8 +124,8 @@ router.post("/register", function(req, res){
         sendgridMail.setApiKey(process.env.SEND_GRID_API_KEY);
 
         const msg={
-            to: "knight1972001@gmail.com",
-            from: "knight1972001@gmail.com",
+            to: email,
+            from: "lnguyen97@myseneca.ca",
             subject: "Welcome to our bakery",
             html:
                 `Hello ${firstName} ${lastName},<br>
