@@ -1,0 +1,46 @@
+<br><br><br><br><br><br><br><br><br>
+
+<p style="text-align:center;"><b>All User</b></p>
+
+
+<div class="">
+    {{#each data}}
+    <div>
+        <form method="post" action="updateUser" enctype="multipart/form-data">
+            <table class="table">
+                <tr class="table-secondary">
+                    <td>ID</td>
+                    <td>First Name</td>
+                    <td>Last Name</td>
+                    <td>Email</td>
+                    <td>Password</td>
+                    <td>Type</td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="_id" value="{{_id}}" readonly/></td>
+                    <td><textarea style="resize: none;" rows="2" cols="30" name="firstName" wrap="soft" onchange=enableUpdate("{{_id}}")>{{firstName}}</textarea></td>
+                    <td><textarea style="resize: none;" rows="3" cols="40" name="lastName" wrap="soft" onchange=enableUpdate("{{_id}}") >{{lastName}} </textarea></td>
+                    <td><textarea style="resize: none;" rows="3" cols="40" name="email" wrap="soft" onchange=enableUpdate("{{_id}}") >{{email}} </textarea></td>
+                    <td><textarea style="resize: none;" rows="3" cols="40" name="password" wrap="soft" onchange=enableUpdate("{{_id}}") >{{password}} </textarea></td>
+                    <td>
+                        {{#if isAdmin}}
+                        <input type="radio" name="isAdmin" value="admin" checked>
+                        <lable for="admin">Admin</lable><br>
+                        <input type="radio" name="isAdmin" value="client" onchange=enableUpdate("{{_id}}")>
+                        <lable for="client">Client</lable><br>
+                        {{else}}
+                        <input type="radio" name="isAdmin" value="admin" onchange=enableUpdate("{{_id}}")>
+                        <lable for="admin">Admin</lable><br>
+                        <input type="radio" name="isAdmin" value="client" checked>
+                        <lable for="client">Client</lable><br>
+                        {{/if}}
+                    </td>
+                    <td><button id="submit{{_id}}" name="update" value="update" disabled>Update</button></td>
+                    <td><button type="submit" name="update" value="delete">Delete</button></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    {{/each}}
+</div>
+

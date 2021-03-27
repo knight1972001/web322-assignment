@@ -1,0 +1,80 @@
+<br><br><br><br><br><br><br><br><br>
+
+<p style="text-align:center;"><b>All Products</b></p>
+<div class="container-xl">
+    {{#each data}}
+<div>
+    <form method="post" action="updateProduct" enctype="multipart/form-data">
+        <table border="1" >
+            <tr>
+                <td>ID</td>
+                <td>Image</td>
+                <td>Title</td>
+                <td>Description</td>
+                <td>Price</td>
+                <td>Type</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><input type="text" name="_id" value="{{_id}}" readonly/></td>
+                <td>
+                    <img src="../uploads/{{productImg}}" style="width:100px" atl="productImg" onchange=enableUpdate("{{_id}}") />
+                    <br>
+                    <input type="file" class="form-control" id="floatingInput" name="productImg" onchange=enableUpdate("{{_id}}") >
+                </td>
+                <td><textarea style="resize: none;" rows="2" cols="30" name="title" wrap="soft" onchange=enableUpdate("{{_id}}")>{{title}}</textarea></td>
+                <td><textarea style="resize: none;" rows="3" cols="40" name="description" wrap="soft" onchange=enableUpdate("{{_id}}") >{{description}} </textarea></td>
+                <td><input type="text" name="price" value="{{price}}" onchange=enableUpdate("{{_id}}") /></td>
+                <td>
+                    {{#ifCond type "cake"}}
+                    <input type="radio" name="type" value="cake" checked>
+                    <lable for="cake">Cake</lable><br>
+                    <input type="radio" name="type" value="pizza" onchange=enableUpdate("{{_id}}")>
+                    <lable for="pizza">Pizza</lable><br>
+                    {{else}}
+                    <input type="radio" name="type" value="cake" onchange=enableUpdate("{{_id}}")>
+                    <lable for="cake">Cake</lable><br>
+                    <input type="radio" name="type" value="pizza" checked>
+                    <lable for="pizza">Pizza</lable><br>
+                    {{/ifCond}}
+                </td>
+                <td><button id="submit{{_id}}" name="update" value="update" disabled>Update</button></td>
+                <td><button type="submit" name="update" value="delete">Delete</button></td>
+            </tr>
+        </table>
+    </form>
+</div>
+{{/each}}
+</div>
+
+<br><br><br>
+<p style="text-align:center;"><b>Add Products</b></p>
+
+<div class="mx-auto" style="width: 500px;">
+    <form method="post" action="/product/addProduct" enctype="multipart/form-data">
+        <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="floatingInput" name="title" value="" placeholder="Title">
+        <label for="floatingInput">Title</label>
+    </div>  
+    <div class="form-floating mb-3">
+        <textarea style="resize: none;" cols="68" rows="2" placeholder="Description" class="form" name="description"></textarea>
+    </div>
+    <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="floatingInput" name="price" value="" placeholder="Price">
+        <label for="floatingInput">Price</label>
+    </div>
+    <select class="form-select mb-3" aria-label="Default select example" name="type" required>
+        <option selected>Select product type!</option>
+        <option value="cake">Cake</option>
+        <option value="pizza">Pizza</option>
+    </select>   
+    <div class="form-floating mb-3">
+        <input type="file" class="form-control" id="floatingInput" name="productImg">
+        <label for="floatingInput">Cake Image</label>
+    </div>
+    <div class="form-floating mb-3 text-end">
+        <input class="btn btn-primary" type="submit" value="Submit">
+    </div>
+    </form>
+</div>

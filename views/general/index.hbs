@@ -3,12 +3,8 @@
     <header id="header" class="masthead" style="background-image:url('images/bakery.jpg');">
         <div class="container">
             <div class="intro-text">
-                {{#if values.firstName}}
-                <div class="intro-heading text-uppercase"><span style="color: #212529">Welcome {{values.firstName}}</span></div><a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" role="button" href="#hero">Get Started</a></div>
-                {{else}}
                 <div class="intro-lead-in"><span>Welcome To Bakery</span></div>
                 <div class="intro-heading text-uppercase"><span>It's Nice To Meet You</span></div><a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" role="button" href="#hero">Get Started</a></div>
-                {{/if}}
         </div>
     </header>
     
@@ -49,10 +45,10 @@
                 <div class="row text-center">
                 {{#each cake}}
                     <div class="col-md-4">
-                        <img id="contentImg" src={{img}}>
+                        <img id="contentImg" src="uploads/{{productImg}}">
                         <h4 class="section-heading">{{title}}</h4>
-                        <p class="text-muted">{{des}}</p>
-                        <p class="btn btn-primary" style="position:absolute;bottom:-20px;right:5px;margin:0px;padding:10px 23px;">{{price}}</p>
+                        <p class="text-muted">{{description}}</p>
+                        <p class="btn btn-primary" style="position:absolute;bottom:-20px;right:5px;margin:0px;padding:10px 23px;">${{price}}</p>
                     </div>
                 {{/each}}
                 </div>
@@ -61,10 +57,10 @@
                 <div class="row text-center">
                 {{#each pizza}}
                     <div class="col-md-4">
-                        <img id="contentImg" src={{img}}>
+                        <img id="contentImg" src="uploads/{{productImg}}">
                         <h4 class="section-heading">{{title}}</h4>
-                        <p class="text-muted">{{des}}</p>
-                        <p class="btn btn-primary" style="position:absolute;bottom:-20px;right:5px;margin:0px;padding:10px 23px;">{{price}}</p>
+                        <p class="text-muted">{{description}}</p>
+                        <p class="btn btn-primary" style="position:absolute;bottom:-20px;right:5px;margin:0px;padding:10px 23px;">${{price}}</p>
                     </div>
                 {{/each}}
                 </div>

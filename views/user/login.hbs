@@ -1,4 +1,4 @@
-<header id="header" class="masthead" style="background-image:url('images/bakery.jpg');">
+<header id="header" class="masthead" style="background-image:url('../images/bakery.jpg');">
         <div class="container">
             <div class="intro-text">
                 <div class="intro-lead-in"><span>Welcome To Bakery</span></div>
@@ -10,29 +10,33 @@
         <!-- Nav tabs -->
         <ul class="nav nav-tabs justify-content-center">
             <li class="nav-item">
-            <a class="nav-link active" style="font-size: 20px" href="/login">Login</a>
+            <a class="nav-link active" style="font-size: 20px" href="/user/login">Login</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" style="font-size: 20px" href="/register">Register</a>
+            <a class="nav-link" style="font-size: 20px" href="/user/register">Register</a>
             </li>
         </ul>
 </div>
 
+{{#each errors}}
+    <p style="color: red; text-align: center;">{{this}}</p>
+{{/each}}
+
 <div class="holder">
-    <form method="POST" action="/login">
+    <form method="POST" action="/user/login">
         <h2>Welcome back!</h2>
-        <input type="text" id="email" name="email" placeholder="Email address" value={{values.email}}>
+        <input type="text" name="email" placeholder="Email address" value={{values.email}}>
         <br>
         {{#if validationResults.email}}
         <span style="color: red;">{{ validationResults.email }}</span><br>
         {{/if}}
 
-        <input type="password" id="password" name="password" placeholder="Password">
+        <input type="password" name="password" placeholder="Password">
         <br>
         {{#if validationResults.password}}
         <span style="color: red;">{{ validationResults.password }}</span><br>
         {{/if}}
         <br>
-        <button type="submit">Login</button>
+        <button type="submit" value="Login">Login</button>
     </form>
 </div>
