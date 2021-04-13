@@ -13,87 +13,6 @@ router.get("/register", (req, res) => {
     })
 });
 
-
-
-//setup router for add/remove product
-router.get("/management", function(req, res){
-    var localUser=req.session.user;
-    if(localUser){
-        if(localUser.isAdmin){
-        userModel.find()
-        .exec()
-        .then((data)=>{
-            data=data.map(value=>value.toObject());
-    
-            res.render("user/management", {
-                data: data,
-                title: "User Management"
-            });
-        });
-        }else{
-            res.status(404).render("404");
-        }
-    }else{
-        res.status(404).render("404");
-    }
-    
-});
-
-router.post("/updateUser", (req, res) => {
-    if(req.body.update == "delete"){
-        userModel.deleteOne({
-            _id: req.body._id
-        })
-        .exec()
-        .then(()=>{
-            console.log("Successfully remove user: "+req.body._id);
-            res.redirect("/user/management");
-        }).catch((error)=>{
-            console.log("Error: "+error);
-        });;
-    }else{
-        var convertIsAdminToBool;
-        if(req.body.isAdmin == "admin"){
-            convertIsAdminToBool=true;
-        }else if(req.body.isAdmin == "client"){
-            convertIsAdminToBool=false;
-        }
-
-        var password_encrypted=req.body.password;
-        //Generate the unique salt
-        bcrypt.genSalt(10).then((salt)=>{
-            //hash password
-            bcrypt.hash(req.body.password,salt).then((encryptedPwd)=>{
-                password_encrypted=encryptedPwd;
-                userModel.updateOne({
-                    _id: req.body._id
-                },{
-                    $set:{
-                        firstName: req.body.firstName,
-                        lastName: req.body.lastName,
-                        email: req.body.email,
-                        password: password_encrypted,
-                        isAdmin: convertIsAdminToBool
-                    }
-                })  
-                .exec()
-                .then(()=>{
-                    console.log("Successfully update user: "+req.body._id);
-                }).catch((err)=>{
-                    console.log(`Error adding prodcut to the dbs: ${err}`);
-                });
-            }).catch((error)=>{
-                console.log(`Error when trying hashing: ${error}`);
-            })
-        }).catch((error)=>{
-            console.log(`Error when trying salting: ${error}`);
-        })
-
-        
-    }
-})
-
-
 router.post("/register",(req, res)=>{
     //validation Input
     let validationResults={};
@@ -161,22 +80,37 @@ router.post("/register",(req, res)=>{
                 Welcome!`
         };
         sendgridMail.send(msg).then(()=>{
+            
+            userModel.findOne({
+                email: req.body.email
+            }).then((user)=>{
+                if(user){
+                    validationResults.dataexist = "This email was registered! Use another email!";
+                    passedValidation=false;
 
-            const user = new userModel({
-                firstName: req.body.firstName,
-                lastName: req.body.lastName,
-                email: req.body.email,
-                password: req.body.password,
-                isAdmin: convertIsAdminToBool
-            });
-            user.save().
-            then((userSaved)=>{
-                console.log(`User ${userSaved.firstName} has been registered and isAdmin: ` + convertIsAdminToBool);
-                req.session.user=userSaved;
-                res.redirect("/");
-            }).catch((error)=>{
-                console.log(`User cannot register due to error: ${error}`);
-                res.redirect("/");
+                    res.render("user/register",{
+                        title: "Register",
+                        validationResults: validationResults,
+                        values: req.body
+                    });
+                }else{
+                    const user = new userModel({
+                        firstName: req.body.firstName,
+                        lastName: req.body.lastName,
+                        email: req.body.email,
+                        password: req.body.password,
+                        isAdmin: convertIsAdminToBool
+                    });
+                    user.save().
+                    then((userSaved)=>{
+                        console.log(`User ${userSaved.firstName} has been registered and isAdmin: ` + convertIsAdminToBool);
+                        req.session.user=userSaved;
+                        res.redirect("/");
+                    }).catch((error)=>{
+                        console.log(`User cannot register due to error: ${error}`);
+                        res.redirect("/");
+                    });
+                }
             });
         }).catch(err=>{
             console.log(`Error ${err}`);

@@ -37,6 +37,9 @@
         {{#if validationResults.email}}
         <span style="color: red;">{{ validationResults.email }}</span><br>
         {{/if}}
+        {{#if validationResults.dataexist}}
+         <span style="color: red;">{{ validationResults.dataexist }}</span><br>
+        {{/if}}
         <input type="password" name="password" placeholder="Password">
         <br>
         {{#if validationResults.password}}

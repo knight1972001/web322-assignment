@@ -21,7 +21,7 @@
                 <td>
                     <img src="../uploads/{{productImg}}" style="width:100px" atl="productImg" onchange=enableUpdate("{{_id}}") />
                     <br>
-                    <input type="file" class="form-control" id="floatingInput" name="productImg" onchange=enableUpdate("{{_id}}") >
+                    <input type="file" class="form-control" id="floatingInput" name="productImg" accept="image/*" onchange=enableUpdate("{{_id}}") >
                 </td>
                 <td><textarea style="resize: none;" rows="2" cols="30" name="title" wrap="soft" onchange=enableUpdate("{{_id}}")>{{title}}</textarea></td>
                 <td><textarea style="resize: none;" rows="3" cols="40" name="description" wrap="soft" onchange=enableUpdate("{{_id}}") >{{description}} </textarea></td>
@@ -50,29 +50,38 @@
 
 <br><br><br>
 <p style="text-align:center;"><b>Add Products</b></p>
-
+{{#if error.dataexist}}
+            <span style="color: red; display: flex; justify-content: center">{{ error.dataexist }}</span><br>
+    {{/if}} 
+    
 <div class="mx-auto" style="width: 500px;">
-    <form method="post" action="/product/addProduct" enctype="multipart/form-data">
+    <form method="post" action="/loadData/addProduct" enctype="multipart/form-data">
         <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="floatingInput" name="title" value="" placeholder="Title">
+        <input type="text" class="form-control" id="floatingInput" name="title" placeholder="Title" value={{value.title}}>
         <label for="floatingInput">Title</label>
     </div>  
     <div class="form-floating mb-3">
-        <textarea style="resize: none;" cols="68" rows="2" placeholder="Description" class="form" name="description"></textarea>
+        <textarea style="resize: none;" cols="68" rows="2" placeholder="Description" class="form" name="description">{{value.description}}</textarea>
     </div>
     <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="floatingInput" name="price" value="" placeholder="Price">
+        <input type="text" class="form-control" id="floatingInput" name="price"  placeholder="Price" value={{value.price}}>
         <label for="floatingInput">Price</label>
     </div>
     <select class="form-select mb-3" aria-label="Default select example" name="type" required>
         <option selected>Select product type!</option>
         <option value="cake">Cake</option>
         <option value="pizza">Pizza</option>
-    </select>   
+    </select>
+    
+    {{#if error.img}}
+            <span style="color: red; display: flex; justify-content: center">{{ error.img }}</span><br>
+    {{/if}} 
+      
     <div class="form-floating mb-3">
-        <input type="file" class="form-control" id="floatingInput" name="productImg">
+        <input type="file" class="form-control" id="floatingInput" name="productImg" accept="image/*">
         <label for="floatingInput">Cake Image</label>
     </div>
+    
     <div class="form-floating mb-3 text-end">
         <input class="btn btn-primary" type="submit" value="Submit">
     </div>

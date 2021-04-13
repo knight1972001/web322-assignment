@@ -73,9 +73,6 @@ app.use("/product", productController);
 const userController = require("./controllers/user");
 app.use("/user",userController);
 
-const loadDataController=require("./controllers/load-data");
-app.use("/loadData",loadDataController);
-
 app.use((req, res) =>{
     res.status(404).render("404")
 });
