@@ -15,12 +15,16 @@
                     {{else}}
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/user/login">Register/Login</a></li>
                     {{/if}}
+                    {{#if user.isAdmin}}
+                    {{else}}
                     <li class="nav-item">
                             <a class="nav-link js-scroll-trigger" href="/cart/shopping-cart">
                                 <i class="fa fa-shopping-cart" aria-hidden="true"></i> Shopping Cart
                                 <span class="badge">{{session.cart.totalQuantity}}</span>
                             </a>
                     </li>
+                    {{/if}}
+                    
                 </ul>
             </div>
         </div>
