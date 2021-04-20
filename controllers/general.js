@@ -3,6 +3,7 @@ const router=express.Router();
 const database = require('../models/database');
 const productModel = require('../models/product');
 const path=require("path");
+const Cart= require('../models/cart');
 
 
 const dotenv=require('dotenv');
@@ -66,5 +67,56 @@ router.get("/about", function(req, res){
     });
 });
 
+//CART
+router.get('/add-to-cart/:id', function(req,res,next){
+    var productId=req.params.id;
+    var cart=new Cart(req.session.cart ? req.session.cart : {items:{}});
+
+    productModel.findById(productId, function(err,product){
+        if(err){
+            return res.redirect('/');
+        }
+        cart.add(product,product.id);
+        req.session.cart=cart;
+        console.log(req.session.cart);
+        res.redirect('/product/menu');
+    });
+});
+
+router.get('/remove-from-cart/:id',function(req, res, next){
+    var productId=req.params.id;
+    var cart=new Cart(req.session.cart);
+    productModel.findById(productId, function(err,product){
+        if(err){
+            return res.redirect('/');
+        }
+        cart.removeOne(product,product.id);
+        req.session.cart=cart;
+        console.log(req.session.cart);
+        res.redirect('/cart/shopping-cart');
+    });
+});
+
+
+router.get('/remove-all/:id',function(req, res, next){
+    var productId=req.params.id;
+    var cart=new Cart(req.session.cart);
+    productModel.findById(productId, function(err,product){
+        if(err){
+            return res.redirect('/');
+        }
+        cart.removeAll(product,product.id);
+        req.session.cart=cart;
+        console.log(req.session.cart);
+        res.redirect('/cart/shopping-cart');
+    });
+})
+
+router.get('/checkout',function(req, res, next){
+    req.session.cart=[];
+
+    res.redirect('/cart/thankyou');
+})
+//CART
 
 module.exports=router;

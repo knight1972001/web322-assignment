@@ -1,0 +1,71 @@
+   <header id="header" class="masthead" style="background-image:url('./../images/bakery.jpg');">
+        <div class="container">
+            <div class="intro-text">
+                <div class="intro-lead-in"><span>Welcome To Bakery</span></div>
+                {{#if session.user}}
+                    <div class="intro-heading text-uppercase"><span>It's Nice To Meet You</span></div><a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" role="button" href="#hero">Welcome</a></div>
+                {{else}}
+                    <div class="intro-heading text-uppercase"><span>It's Nice To Meet You</span></div><a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" role="button" href="/user/login">Login</a></div>
+                {{/if}}
+        </div>
+    </header>
+
+    {{#if session.user}}
+        {{#if products}}
+            <div class="container">
+                <table class="table table-hover">
+                    <thead>
+                        <th scope="col">Item Name</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Action</th>
+                        <th scope="col">Quantity</th>
+                    </thead>
+                    <tbody>
+                        {{#each products}}
+                            <tr>
+                                <th scope="row">{{this.item.title}}</th>
+                                <td>${{this.item.price}}</td>
+                                <td>
+                                    <button class="btn btn-primary btn-xs dropdown-toggle" type="button" data-toggle="dropdown">Action</button>
+                                    <ul class="dropdown-menu">
+                                        <li><button type="button" class="btn btn-outline-secondary" onclick="window.location.href='/remove-from-cart/{{this.item._id}}'">Remove By 1</button></a></li>
+                                        <li><button type="button" class="btn btn-outline-secondary" onclick="window.location.href='/remove-all/{{this.item._id}}'">Remove All</button></a></li>
+                                    </ul>
+                                </td>
+                                <td>{{this.quantity}}</td>
+                            </tr>
+                        {{/each}}
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>Items: </th>
+                            <th></th>
+                            <th></th>
+                            <th>${{totalPrice}}</th>
+                        </tr>
+                        <tr>
+                            <th>Tax: </th>
+                            <th></th>
+                            <th></th>
+                            <th>${{tax}}</th>
+                        </tr>
+                        <tr>
+                            <th>Order Total: </th>
+                            <th></th>
+                            <th></th>
+                            <th>${{orderTotal}}</th>
+                        </tr>
+                    </tfoot>
+                </table>
+                <div class="row">
+                    <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
+                        <button type="button" class="btn btn-success" onclick="window.location.href='/checkout'">Checkout</button>
+                    </div>
+                </div>
+            </div>
+        {{else}}
+            <p style="text-align: center; font-weight: bold; font-size: 30px">There is NO item in your cart. Add some!</p>
+        {{/if}}
+    {{else}}
+        <p style="text-align: center; font-weight: bold; font-size: 30px">Please Logged In to continue!</p>
+    {{/if}}

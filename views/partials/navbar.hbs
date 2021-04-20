@@ -5,16 +5,22 @@
                 <ul class="nav navbar-nav ml-auto text-uppercase">
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/">Home</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/product/menu">On the menu</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/about">About</a></li>
                     {{#if user}}
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#">Hello ${{user.firstName}}</a></li>
                         {{#if user.isAdmin}}
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/dashboard">Dashboard</a></li>
                         {{/if}}
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/user/logout">Logout</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#">Hello {{user.firstName}}</a></li>
+                        <li class="nav-item"><a style="font-weight: normal; color: rgb(216, 84, 84);" onmouseover="this.style.fontWeight='bold'" onmouseout="this.style.fontWeight='normal'" class="nav-link js-scroll-trigger" href="/user/logout">Logout</a></li>
                     {{else}}
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/about">About</a></li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/user/login">Register/Login</a></li>
                     {{/if}}
+                    <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="/cart/shopping-cart">
+                                <i class="fa fa-shopping-cart" aria-hidden="true"></i> Shopping Cart
+                                <span class="badge">{{session.cart.totalQuantity}}</span>
+                            </a>
+                    </li>
                 </ul>
             </div>
         </div>

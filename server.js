@@ -60,6 +60,7 @@ app.use((req,res,next)=>{
     //res.locals.user is a global hdb variable
     //this means that ever single hdb file can access that user variable!
     res.locals.user=req.session.user;
+    res.locals.session=req.session;
     next();
 });
 
@@ -75,6 +76,9 @@ app.use("/user",userController);
 
 const loadDataController=require("./controllers/load-data");
 app.use("/loadData",loadDataController);
+
+const cartController = require("./controllers/cart");
+app.use("/cart", cartController);
 
 app.use((req, res) =>{
     res.status(404).render("404")

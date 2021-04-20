@@ -54,3 +54,6 @@
     background-color: red;
     top:0;
 }
+
+#add-to-cart:hover span {display:none}
+#add-to-cart:hover:before {content:"Add to Cart"}

@@ -15,4 +15,17 @@ router.get("/menu", function(req, res){
     })
 });
 
+module.exports=findProduct=(id)=>{
+    productModel.findOne({
+        _id: id
+    }).then((data)=>{
+        if(data){
+            data=data.map(value=>value.toObject());
+            return data;
+        }else{
+            return false;
+        }
+    });
+}
+
 module.exports=router;

@@ -23,6 +23,10 @@ const userSchema=new Schema({
     },isAdmin: {
         type: Boolean,
         default: false
+    },shoppingCart: {
+        productId: String,
+        productName: String,
+        quantity: Number,
     }
 });
 
